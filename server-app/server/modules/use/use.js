@@ -1,8 +1,6 @@
-function use (optionsObj) {
+function use (optionsObj, usedOptions) {
      for (key in optionsObj) {
-         if (key === 'fourOfourPage') {
-            this.usedOptions.fourOfourPage = optionsObj[key];
-         }
+         
      }
 }
 

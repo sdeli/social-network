@@ -48,8 +48,4 @@ function sendStaticFile(res, filePath) {
     });
 }
 
-module.exports = {
-    respondWithStaticFile,
-    getContentType,
-    sendStaticFile
-}
+module.exports = respondWithStaticFile;

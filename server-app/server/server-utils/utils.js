@@ -38,5 +38,6 @@ function sendTemplateByEjs(templatePath) {
 
 module.exports = {
     trimmPath,
-    getFilesFromFolder
+    getFilesFromFolder,
+    sendTemplateByEjs
 }

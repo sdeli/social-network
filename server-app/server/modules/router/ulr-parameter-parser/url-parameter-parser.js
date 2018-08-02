@@ -21,7 +21,7 @@
 function urlParameterParser(reqUrlPath, route){
     isEdgeCase = checkEdgeCases(reqUrlPath, route)
     if (isEdgeCase) {
-        return {};
+        return true;
     }
 
     let reqUrlPathArr = removeEmptyIndexesInArr(reqUrlPath.split('/'));
@@ -44,6 +44,8 @@ function checkEdgeCases(reqUrlPath, route) {
     if (reqUrlPath === '*') {
         return true;
     } else if ((reqUrlPath === '/' || reqUrlPath === '') && route === '/') {
+        return true;
+    } else if (route === '/*') {
         return true;
     } else {
         return false;
@@ -91,11 +93,4 @@ function removeEmptyIndexesInArr(arr) {
     return arr.filter(currItem => currItem !== '');
 }
 
-module.exports = {
-    urlParameterParser,
-    checkEdgeCases,
-    checkIfRouteAndReqUrlPathMatch,
-    getIndexesOfPathVars,
-    getPathVariables,
-    removeEmptyIndexesInArr,
-}
+module.exports = urlParameterParser;

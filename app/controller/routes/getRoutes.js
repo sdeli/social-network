@@ -1,5 +1,5 @@
-function homeRoute(server ,db) {
-    server.route('/', {method : 'GET'},(req, res) => {
+function getRoutes(server ,db) {
+    server.route('/', {method : 'GET'}, (req, res) => {
         res.writeHead(200, 'OK', {contentType : 'text/plain'});
 
         var pageVars = {
@@ -10,6 +10,18 @@ function homeRoute(server ,db) {
 
         res.renderFile('../views/landing.ejs', pageVars);
     });
+
+    server.route('/*', (req, res) => {
+        res.writeHead(200, 'OK', {contentType : 'text/plain'});
+
+        var pageVars = {
+            siteTitle : 'social network',
+            pageTitle : '404',
+            pageID : '404'
+        };
+
+        res.renderFile('../views/404.ejs', pageVars);
+    });
 }
 
-module.exports = homeRoute;
+module.exports = getRoutes;
