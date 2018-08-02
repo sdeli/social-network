@@ -1,0 +1,301 @@
+.potential_friend{
+	float:left;
+	margin-right: 100px;
+	margin-bottom: 15px;
+}
+
+.friend_profile_pic img{
+	width: 60px;
+}
+
+#community_header{
+	text-align: center;	
+}
+
+#community_statuses_div{
+	width: 50%;
+ 	margin: auto;
+ 	text-align: center
+}
+
+#submit_status_button{
+	margin-top: 20px;
+}
+
+.user_statuses{
+	list-style-type: none;
+}
+
+#find_friends_redirect{
+	float: right;
+}
+
+.user_statuses li{
+	width: 35%;
+	margin-left: 30%;
+	margin-bottom: 20px;
+}
+
+.user_statuses li img{
+	width: 108px;
+	float: left;
+	clear: left;
+
+}
+
+.poster_name{
+	float: left;
+	margin-left: 20px;
+}
+
+.user_statuses li p{
+	float: left;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	clear: left;
+}
+
+.clearfix:before,
+.clearfix:after{
+	content: "";
+	display: block;
+}
+
+.clearfix:after{
+	clear:both;
+}
+
+#statuses_textarea{
+	resize: none;
+}
+
+.landing_body{
+	background-image: url("../images/bg.jpg");
+	background-size: cover;
+}
+
+#landing_header{
+	font-size: 80px;
+	font-weight: 700;
+	font-family: Trebuchet MS, Helvetica, sans-serif;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+#sign_up_div,#sign_in_div{
+	width: 50%;
+	float: left;
+	padding-top: 15%;
+}
+
+#sign_up_form,#sign_in_form{
+	width: 50%;
+    height:200px;
+    margin: auto;
+}
+
+#sign_up_form input{
+	float: left;
+	margin-left: 35%; 
+	clear:both;
+	margin-top: 20px;
+	height: 20px;
+}
+
+#sign_up_form input[type=button]{
+	float:left;
+	clear:both;
+	margin-top: 25px;
+	margin-left: 35%;
+	padding: 0px;
+	width: 100px;
+}
+
+#sign_up_form h2{
+	text-align: center;
+	font-family: Trebuchet MS, Helvetica, sans-serif;
+}
+
+#sign_in_form h2{
+	text-align: center;
+	font-family: Trebuchet MS, Helvetica, sans-serif;
+}
+
+#sign_in_form input{
+	float: left;
+	margin-top: 20px;
+	margin-left: 35%;
+	height: 20px;
+}
+
+#sign_in_form input[type=button]{
+	clear: left;
+	width: 100px;
+	margin-left: 35%;
+}
+
+#profile_header{
+	text-align: center;
+}
+
+#user_profile_div{
+	float: left;
+	margin-left: 20%;
+}
+
+.profile_info{
+	width: 50%;
+}
+
+#save_profile_button{
+	float: left;
+	margin-left: 40px
+}
+
+#cancel_edit_profile{
+	float: left;
+	margin-left: 10px;
+}
+
+#edit_profile_form_container{
+	width: 20%;
+	margin-left: 5%;
+	float: left;
+	background-color: #f4f4f4;
+	display: none;
+}
+
+#edit_profile_form ul{
+	list-style-type: none;
+}
+
+#edit_profile_form ul li label{
+	float: left;
+	clear: both;
+}
+
+#edit_profile_form ul li input{
+	float: left;
+	clear: both;
+	margin-bottom: 5px;
+}
+
+#edit_profile_form ul li textarea{
+	float: left;
+	clear: both;
+	resize: none;
+	margin-bottom: 5px;
+}
+
+.friend_requests_section{
+	float: right;
+	margin-right: 2px;
+}
+
+.friend_requests_section ul{
+	list-style-type: none;
+}
+
+#user_friends_list_section{
+	float:left;
+}
+
+#user_friends_list_section ul{
+	padding-left: 0px;
+}
+
+#chat_section_wrapper{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+}
+
+.chat_section{	
+	width: 430px;
+	float: right;
+	border: 1px solid #808080;
+	max-height: 430px;
+	margin-left: 5px;
+}
+
+.usr_msg{
+	margin-bottom: 10px;
+}
+
+.friend_request_pic img{
+	width: 60px;
+}
+
+.user_friend_list img{
+	width: 60px;
+}
+
+#profile_picture_div img{
+	width: 200px;
+}
+
+.all_chat_messages{
+	max-height: 300px;
+	height:200px;
+	overflow-y: scroll;
+	background-color: white;
+}
+
+#send_message{
+	border-top: 1px solid #808080;
+}
+
+#send_message input{
+	width:100%;
+}
+
+.usr_msg_box{
+	display: inline-block;
+	margin-left: 10px;
+	background-color: #e6e6e6;
+	border: 2px solid #a1a1a1;
+	border-radius: 12px;
+}
+
+.usr_msg_box p{
+	max-width: 200px;
+	word-wrap: break-word;
+	margin: 5px;
+}
+
+#send_message_input{
+	text-indent: 30%;
+	color: #666;
+	font-family: helvetica;
+	font-size: 12px;
+}
+
+#chat_title_section{
+	font-family: helvetica;
+	font-size: 15px;
+	font-weight: bold;
+	background: #808080;
+	height: 25px;
+}
+
+.chat_close{
+	display: inline-block;
+}
+
+#chat_title_section span{
+	vertical-align: top;
+}
+
+.chat_close{
+	margin-left: 60%;
+	cursor: pointer;
+}
+
+.chat_close img{
+	width: 25px;
+}
+
+#user_profile_visit_div{
+	width: 50%;
+	margin: auto;
+}
