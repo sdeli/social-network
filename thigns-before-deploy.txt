@@ -1,0 +1,4 @@
+in:
+/home/sandor/Documents/on-going-projects/social-network/app/front-end-tmp/js/moduls/sign-in/sign-in.js
+/home/sandor/Documents/on-going-projects/social-network/app/front-end-tmp/js/moduls/sign-up/sign-up.js
+abstrct from redirection the port

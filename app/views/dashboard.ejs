@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/template/head.ejs %>
+<body class="landing_body">
+    <input id='log_out_user' type="button" value='sign out'>
+    <h1 id="landing_header">Welcome <%= userName %></h1>
+    <h2 id="community_header">Node Connect Statuses</h2>
+    <div id="community_statuses_div">
+        <ol class="user_statuses">
+            
+        </ol>
+        <textarea id="statuses_textarea" rows='4' cols='58'></textarea><br>
+        <button id="submit_status_button" type='submit'>POST</button>
+    </div>
+    <script src="/js/dashboard-page-bundled.js"></script>
+</body>
+</html>

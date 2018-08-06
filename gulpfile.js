@@ -12,9 +12,13 @@ const gulpPostcss = require("gulp-postcss"),
 	  gulp = require('gulp'),
 
 	  // When changing projects these need to be changed:
-	  jsSrcFile = './app/front-end-tmp/js/home-unbundled.js',
-	  bundledJsSrcFileName = 'front-end-bundled.js',
-	  bundledJsSrcFileDest = './app/public/js/';
+	  signInPagejsSrcFile = './app/front-end-tmp/js/sign-in-page-unbundled.js',
+      signInPagebundledJsSrcFileName = 'sign-in-page-bundled.js',
+      signInPagebundledJsSrcFileDest = './app/public/js/';
+
+      dashboardPagejsSrcFile = './app/front-end-tmp/js/dashboard-page-unbundled.js',
+	  dashboardPagebundledJsSrcFileName = 'dashboard-page-bundled.js',
+	  dashboardPagebundledJsSrcFileDest = './app/public/js/';
 
 	  cssSrcFile = "app/front-end-tmp/css/landing-unbundled.css",
 	  bundledCssSrcFileName = 'landing-bundled.css',
@@ -23,18 +27,40 @@ const gulpPostcss = require("gulp-postcss"),
 let bundleJavascriptI = 0; 
 let bundleCssI = 0; 
 
-gulp.task('bundle-javascript', function() {
+gulp.task('default', () => {
+    console.log('fut a default i: ' + bundleCssI);
 	bundleJavascriptI++;
     console.log('bundle-javascript cycles: ' + bundleJavascriptI);
 
-    return browserify(jsSrcFile)
+    gulp.watch('./app/front-end-tmp/css/landing-unbundled.css', ['bundle-css']);
+    gulp.watch('./app/front-end-tmp/css/css-modules/**/*.css', ['bundle-css']);
+    gulp.watch('./app/front-end-tmp/js/sign-in-page-unbundled.js', ['bundle-sign-in-page-javascript']);
+    gulp.watch('./app/front-end-tmp/js/dashboard-page-unbundled.js', ['bundle-dashboard-page-javascript']);
+    gulp.watch('./app/front-end-tmp/js/**/*.js', ['bundle-dashboard-page-javascript', 'bundle-sign-in-page-javascript']);
+});
+
+gulp.task('bundle-sign-in-page-javascript', function() {
+    console.log('bundle-sign-in-page-javascript');
+    return browserify(signInPagejsSrcFile)
         .bundle()
         .on('error', function(errorInfo){
    		console.log( errorInfo.toString() )
    		this.emit('end');
    		})
-        .pipe(source(bundledJsSrcFileName))
-        .pipe(gulp.dest(bundledJsSrcFileDest))
+        .pipe(source(signInPagebundledJsSrcFileName))
+        .pipe(gulp.dest(signInPagebundledJsSrcFileDest));
+});
+
+gulp.task('bundle-dashboard-page-javascript', function() {
+    console.log('bundle-dashboard-page-javascript');
+    return browserify(dashboardPagejsSrcFile)
+        .bundle()
+        .on('error', function(errorInfo){
+        console.log( errorInfo.toString() )
+        this.emit('end');
+        })
+        .pipe(source(dashboardPagebundledJsSrcFileName))
+        .pipe(gulp.dest(dashboardPagebundledJsSrcFileDest));
 });
 
 gulp.task("bundle-css", function(){
@@ -52,12 +78,4 @@ gulp.task("bundle-css", function(){
    	})
    	.pipe(rename(bundledCssSrcFileName) )
    	.pipe(gulp.dest(bundledCssSrcFileDest) )
-});
-
-gulp.task('default', () => {
-	console.log('fut a default i: ' + bundleCssI);
-	gulp.watch('./app/front-end-tmp/css/landing-unbundled.css', ['bundle-css']);
-	gulp.watch('./app/front-end-tmp/css/css-modules/**/*.css', ['bundle-css']);
-	gulp.watch('./app/front-end-tmp/js/front-end-unbundled.js', ['bundle-javascript']);
-	gulp.watch('./app/front-end-tmp/js/**/*.js', ['bundle-javascript']);
 });

@@ -1,11 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const signUp = require('./moduls/sign-up/sign-up.js');
-const signIn = require('./moduls/sign-in/sign-in.js');
-
-signIn();
-signUp();
-
-},{"./moduls/sign-in/sign-in.js":2,"./moduls/sign-up/sign-up.js":3}],2:[function(require,module,exports){
 const {setCookie, returnObjFromJson, clearFormFields} = require('../../utils/utils.js');
 
 function signIn() {
@@ -16,6 +9,7 @@ function signIn() {
 
     signInBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        signInBtn.disabled = true;
         console.log('asd');
         let userDetailsJson = JSON.stringify({
             password : usrpasswordField.value,
@@ -44,7 +38,7 @@ function signIn() {
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
                 console.log(this.response);
-                clearFormFields([usrEmailField, usrpasswordField]);
+                signInBtn.disabled = false;
             }
         }
         
@@ -53,8 +47,8 @@ function signIn() {
 }
 
 module.exports = signIn;
-},{"../../utils/utils.js":4}],3:[function(require,module,exports){
-const {setCookie, isJson, clearFormFields} = require('../../utils/utils.js');
+},{"../../utils/utils.js":4}],2:[function(require,module,exports){
+const {setCookie, returnObjFromJson} = require('../../utils/utils.js');
 
 function signUp() {
     let signUpForm = document.querySelector('form#sign_up_form');
@@ -65,7 +59,8 @@ function signUp() {
 
     signUpBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        console.log('asd');
+        signUpBtn.disabled = true;
+
         let userDetailsJson = JSON.stringify({
             usrName : usrNameField.value,
             password : passwordField.value,
@@ -100,7 +95,7 @@ function signUp() {
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
                 console.log(this.response);
-                clearFormFields([usrNameField, passwordField, emailField]);
+                signUpBtn.disabled = false;
             }
         }
         
@@ -109,7 +104,14 @@ function signUp() {
 }
 
 module.exports = signUp;
-},{"../../utils/utils.js":4}],4:[function(require,module,exports){
+},{"../../utils/utils.js":4}],3:[function(require,module,exports){
+const signUp = require('./moduls/sign-up/sign-up.js');
+const signIn = require('./moduls/sign-in/sign-in.js');
+
+signIn();
+signUp();
+
+},{"./moduls/sign-in/sign-in.js":1,"./moduls/sign-up/sign-up.js":2}],4:[function(require,module,exports){
 function setCookie(cookieName, cookiesValue, expirationDays, path) {
     var dateObj = new Date();
     dateObj.setTime(dateObj.getTime() + (expirationDays*24*60*60*1000));
@@ -144,4 +146,4 @@ module.exports = {
     clearFormFields,
     destroyCookie
 }
-},{}]},{},[1]);
+},{}]},{},[3]);

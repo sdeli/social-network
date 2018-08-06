@@ -1,4 +1,4 @@
-serverObject = require('./server/server-object.js')
+const serverObject = require('./server/server-object.js')
 
 module.exports = (function(){
 

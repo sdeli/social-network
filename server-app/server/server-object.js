@@ -13,7 +13,7 @@ function createServerObj() {
             ejsGlobals : {},
             usedOptions
         },
-        route : function defineRoutes(path, opts, callBack) {
+        route : function (path, opts, callBack) {
             if (arguments.length === 2) {
                 var callBack = opts;
 
