@@ -9,6 +9,11 @@ function logInUser(userCredentials, res) {
 
 }
 
+function respondThisUserDoesntExistAnymore(res) {
+    let html = '<h1>this user doesnt exist anymore</h1>';
+    sendStatusMessageToFrontEnd(200, 'OK', 'text/html', html, res)
+}
+
 function sendEncryptCredentilalsToFrontEnd(encriptedCredentials, res) {
     cookieDetailsJson = JSON.stringify({
         name : 'user_auth_session',
@@ -30,6 +35,11 @@ function sendCookieDetailsToFrontEnd(res, cookieName, encryptedCreds) {
 function sendStatusMessageToFrontEnd(statusCode, StatusMessage, ContentType, endMsg, res){
     res.writeHead(statusCode, StatusMessage, {contentType : ContentType});
     res.end(endMsg);
+}
+
+function sendObjToFrontEnd(res, obj) {
+    let json = JSON.stringify(obj);
+    sendStatusMessageToFrontEnd(200, 'OK', 'application/json', json, res);
 }
 
 function returnObjFromJson(str) {
@@ -61,17 +71,32 @@ function generateMemberId(usrName) {
   return `${usrName}-${randomStr}`;
 }
 
+function generateRandomStr(strLength) {
+  var randomStr = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%$@!^&*()";
+
+  for (var i = 0; i < strLength - 1; i++) {
+    randomStr += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+    
+  return randomStr;
+}
+
 function collectRequestBody(req) {
     return new Promise((resolve, reject) => {
-        let requestBodyJson = '';
+        let requestBodyUnknownType = '';
 
         req.on('data', (chunk) => {
-            requestBodyJson += chunk;
+            requestBodyUnknownType += chunk;
         });
 
         req.on('end', () => {
-            let requestBodyObj = JSON.parse(requestBodyJson);
-            resolve(requestBodyObj)
+            try {
+                let requestBodyObj = JSON.parse(requestBodyUnknownType);
+                resolve(requestBodyObj);
+            } catch(e) {
+                resolve(requestBodyUnknownType);
+            }
         });
 
         req.on('error', (err) => {
@@ -81,11 +106,34 @@ function collectRequestBody(req) {
     });
 }
 
+function getDate() {
+    let today = new Date();
+    //let hh = today.getHours()
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+
+    today = mm + ' ' + dd + ' ' + yyyy;
+    return today
+}
+
 module.exports = {
     logInUser,
     redirectToOtherPage,
     sendStatusMessageToFrontEnd,
     sendCookieDetailsToFrontEnd,
     generateMemberId,
-    collectRequestBody
+    generateRandomStr,
+    collectRequestBody,
+    sendObjToFrontEnd,
+    getDate,
+    respondThisUserDoesntExistAnymore
 }

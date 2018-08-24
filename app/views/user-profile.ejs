@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/template/head.ejs %>
+<body>
+    <input id='log_out_user' type="button" value='sign out'>
+    <button id="edit_profile_button">Edit profile</button>
+    <h1 id="profile-header">Profile</h1>
+    <div id="user_profile_div">
+        <div class="profile_info" id="profile_picture_div">
+            <h2>Name: <%= usrProfileObj.usrName %></h2>
+            <h4>Location: <%= usrProfileObj.location %>   </h4>
+            <img src="/users_profile_pic/<%= usrProfileObj.profilePicName %>" alt="">
+        </div>
+        <div class="profile_info" id="about_me">
+            <h3>About Me</h3>
+            <p><%= usrProfileObj.description %></p>
+        </div>
+        <div class="profile_info" id="interests">
+            <h3>Interests</h3>
+            <p><%= usrProfileObj.interests %></p>
+        </div>
+        <% include partials/template/friend-requests-div.ejs %>
+        </div>
+    <div id="edit_profile_form_container">
+        <form id="edit_profile_form">
+            <ul>
+                <li>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" value='<%= usrProfileObj.usrName %>'>
+                </li>
+                <li>
+                    <label for="location">Location</label>
+                    <input type="text" name="location" value='<%= usrProfileObj.location %>'>
+                </li>
+                <li>
+                    <label for="descritpion">Description</label>
+                    <textarea name="description" id="" cols="30" rows="4"><%= usrProfileObj.description %></textarea>
+                </li>
+                <li>
+                    <label for="interests">Interests</label>
+                    <textarea name="interests" cols="30" rows="4"><%= usrProfileObj.interests %></textarea>
+                </li>
+                <li class="clearfix">
+                    <label for="profile_pic">Interests</label>
+                    <input id="upload_profile_pic" type='file'>
+                </li>
+                <button id="save_profile_button">save</button>
+                <button id="cancel_edit_profile">cancel</button>
+            </ul>
+        </form>
+        <% include partials/template/friends-div.ejs %>
+    </div>
+    <div></div>
+    <script src="/js/profile-page-bundled.js"></script>
+</body>
+</html>

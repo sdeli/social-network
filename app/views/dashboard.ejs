@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include partials/template/head.ejs %>
-<body class="landing_body">
+<body>
     <input id='log_out_user' type="button" value='sign out'>
-    <h1 id="landing_header">Welcome <%= userName %></h1>
+    <h1>Dashboard</h1>
+    <h2>Welcome <%= userName %></h2>
     <h2 id="community_header">Node Connect Statuses</h2>
     <div id="community_statuses_div">
-        <ol class="user_statuses">
-            
-        </ol>
         <textarea id="statuses_textarea" rows='4' cols='58'></textarea><br>
         <button id="submit_status_button" type='submit'>POST</button>
+        
+        <ol class="user_statuses">
+            <% for(var i = userStatusesArr.length - 1; i >= 0; i--) {%>
+                <li class="clearfix">
+                    <img src="/users_profile_pic/<%= userStatusesArr[i].profilePicName %>" alt="">
+                    <div class="poster_name">
+                        <a href='/diff-user-profile-page/<%= userStatusesArr[i].usersDocId %>'><%= userStatusesArr[i].usrName %></a>
+                    </div>
+                    <p><%= userStatusesArr[i].statusText %></p>
+                    <p><%= userStatusesArr[i].statusDate %></p>
+                </li>
+            <% } %>
+        </ol>
     </div>
     <script src="/js/dashboard-page-bundled.js"></script>
 </body>

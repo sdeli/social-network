@@ -20,7 +20,8 @@ function signInPageRoute(server ,db) {
         var pageVars = {
             siteTitle : 'social network',
             pageTitle : 'Home',
-            pageID : 'home_page'
+            pageID : 'home_page',
+            cssFileName : 'landing-bundled.css',
         };
 
         res.renderFile('../views/sign-in.ejs', pageVars);

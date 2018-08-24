@@ -1,0 +1,16 @@
+<div class="friends">
+    <% if (usrProfileObj.friends.length === 0) { %>
+    <h3>You Have No friends At the moment</h3>
+    <% } else { %>
+        <h3 class="friends__heading">Friends:</h3>
+        <% for(var i = 0; i < usrProfileObj.friends.length; i++) {%>
+        <div class="friends__cont clearfix">
+            <img class="friends__cont__img" src="/users_profile_pic/<%= usrProfileObj.friends[i].profilePicName %>" alt="">
+            <ul class="friends__cont__ul">
+                <li class="friends__cont__li friend_requests__cont__li--name"><a href='/diff-user-profile-page/<%= usrProfileObj.friends[i].docId %>'><%= usrProfileObj.friends[i].usrName %></a></li>
+                <li class="friends__cont__li friend_requests__cont__li--descr"><%= usrProfileObj.friends[i].description %></li>
+            </ul>
+        </div>
+        <% } %>
+    <% } %>
+</div>

@@ -7,7 +7,10 @@ userDocSchiema:
  profilePicName : `${this.memberId}`-String`, mandatory
  friends : [{member_id : String, friend_name : String, profile_pic: String}],
  friendRequest : [{member_id : String, friend_name : String, profile_pic: String}],
- user_profile :  
+ localtion : {type : String},
+ description : {type : String},
+ interests : {type : String},
+ profile_pic : {type : String, def_value : 'default.png'} 
 
 */
 
@@ -30,7 +33,7 @@ function getUserInfosFromDb(db, query) {
 function checkIfUserExists(db, userDataObj) {
     return new Promise((resolve, reject) => {
         db.collection('users')
-            .findOne({email : userDataObj.email}).then(result => {
+            .findOne({email : userDataObj.email, password : userDataObj.password}).then(result => {
                 if (result) {
                     resolve(result);
                 } else {
@@ -44,14 +47,6 @@ function checkIfUserExists(db, userDataObj) {
 
 }
 
-/*
-userDocSchema = {
-    usrName,
-    password,
-    email,
-    profilePicName
-}
-*/
 function insertOneUserToDb(db, userDataObj) {
     return new Promise((resolve, reject) => {
         db.collection('users')
@@ -64,8 +59,37 @@ function insertOneUserToDb(db, userDataObj) {
     });
 }
 
+function updateUserInDb(db, findQuery, updateQuery, updateOpts) {
+    updateOpts = updateOpts || {returnOriginal : false};
+    
+    return new Promise((resolve, reject) => {
+        db.collection('users')
+        .findOneAndUpdate(findQuery, updateQuery, updateOpts)
+        .then((updates) => {
+            resolve(updates.lastErrorObject.updatedExisting);
+        }).catch(e => {
+            reject(e);
+        })
+    });
+}
+
+function aggregateUsersDb(db, aggrQuery) {
+    return new Promise((resolve, reject) => {
+        db.collection('users')
+        .aggregate(aggrQuery)
+        .toArray()
+        .then((docs) => {
+            resolve(docs)
+        }).catch(e => {
+            reject(e);
+        })
+    })
+}
+
 module.exports = {
     checkIfUserExists,
     insertOneUserToDb,
-    getUserInfosFromDb
+    getUserInfosFromDb,
+    updateUserInDb,
+    aggregateUsersDb
 }

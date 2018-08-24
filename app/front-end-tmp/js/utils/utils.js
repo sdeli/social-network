@@ -26,9 +26,21 @@ function clearFormFields(formFieldsArr) {
     });
 }
 
+function checkIfHasSignedInCookie() {
+    var ifHasSignedInCookie = document.cookie.indexOf("user_auth_session") >= 0;
+
+    if (ifHasSignedInCookie) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     setCookie,
     returnObjFromJson,
     clearFormFields,
-    destroyCookie
+    destroyCookie,
+    clearFormFields,
+    checkIfHasSignedInCookie
 }

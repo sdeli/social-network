@@ -36,7 +36,7 @@ function signIn() {
                 setCookie(cookieName, encriptedCredentials, 100, '/');
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
-                console.log(this.response);
+                alert(this.response);
                 signInBtn.disabled = false;
             }
         }

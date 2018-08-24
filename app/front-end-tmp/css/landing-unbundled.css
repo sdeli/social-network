@@ -1,4 +1,5 @@
+@import url("css-modules/friend-requests.css");
 @import url("css-modules/friends.css");
-@import url("css-modules/home_page.css");
+@import url("css-modules/dashboard_page.css");
 @import url("css-modules/landing.css");
 @import url("css-modules/user_profile.css");

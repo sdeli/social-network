@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/template/head.ejs %>
+<body>
+    <input id='log_out_user' type="button" value='sign out'>
+    <h1 id="profile-header">Profile of <%= diffUsrProfileObj.usrName %></h1>
+    <div id="user_profile_div">
+        <div class="profile_info" id="profile_picture_div">
+            <h4>Location: <%= diffUsrProfileObj.location %>   </h4>
+            <img src="/users_profile_pic/<%= diffUsrProfileObj.profilePicName %>" alt="">
+        </div>
+        <div class="profile_info" id="about_me">
+            <h3>About Me</h3>
+            <p><%= diffUsrProfileObj.description %></p>
+        </div>
+        <div class="profile_info" id="interests">
+            <h3>Interests</h3>
+            <p><%= diffUsrProfileObj.interests %></p>
+        </div>
+        <div class="profile_info friendship_status">
+            <% if (areTheyFriends === 'friendship requested') { %>
+                <h3>Friendship Requested</h3>
+                <button type="button" class="cancel_friendship_request" data-docid='<%= diffUsrProfileObj.docId %>'>Whitdraw FriendShip Request</button> 
+            <% } else if (areTheyFriends === 'they are friends') { %>
+                <h3>You are friends</h3>
+                <button type="button" id='remove-friend-btn' data-docid='<%= diffUsrProfileObj.docId %>'>Remove From Friends</button> 
+            <% } else { %>
+                <h3>You are not friends here</h3>
+                <button id="request_friendship_btn" data-docid='<%= diffUsrProfileObj.docId %>'>Request Friendship</button>
+            <% } %>
+        </div>
+    </div>
+    
+    <script src="/js/diff-user-profile-page-bundled.js"></script>
+</body>
+</html>

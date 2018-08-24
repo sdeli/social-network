@@ -1,0 +1,40 @@
+.friend_requests {
+}
+
+.friend_requests__heading {
+    margin-bottom: 0.5rem;
+}
+
+.friend_requests__cont {
+    padding: 7px;
+    background: lightgrey;
+    margin-bottom: 7px;
+}
+
+.friend_requests__cont__img {
+    display: inline-block;
+    width: 200px;
+}
+
+.friend_requests__cont__ul {
+    list-style: none;
+    display: inline-block;
+    margin-top: 0;
+    padding-left: 15px;
+    vertical-align: top;
+}
+
+.friend_requests__cont__li--name {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.friend_requests__cont__li--descr {
+
+}
+
+.friend_requests__cont__accept_request_btn {
+    display: block;
+    margin-top: 0.1rem;
+}

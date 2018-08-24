@@ -1,11 +1,83 @@
-.potential_friend{
-	float:left;
-	margin-right: 100px;
-	margin-bottom: 15px;
+.friend_requests {
 }
 
-.friend_profile_pic img{
-	width: 60px;
+.friend_requests__heading {
+    margin-bottom: 0.5rem;
+}
+
+.friend_requests__cont {
+    padding: 7px;
+    background: lightgrey;
+    margin-bottom: 7px;
+}
+
+.friend_requests__cont__img {
+    display: inline-block;
+    width: 200px;
+}
+
+.friend_requests__cont__ul {
+    list-style: none;
+    display: inline-block;
+    margin-top: 0;
+    padding-left: 15px;
+    vertical-align: top;
+}
+
+.friend_requests__cont__li--name {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.friend_requests__cont__li--descr {
+
+}
+
+.friend_requests__cont__accept_request_btn {
+    display: block;
+    margin-top: 0.1rem;
+}
+
+.friends {
+}
+
+.friends__heading {
+    margin-bottom: 0.5rem;
+}
+
+.friends__cont {
+    padding: 7px;
+    background: lightgrey;
+    margin-bottom: 7px;
+}
+
+.friends__cont__img {
+    display: inline-block;
+    width: 200px;
+}
+
+.friends__cont__ul {
+    list-style: none;
+    display: inline-block;
+    margin-top: 0;
+    padding-left: 15px;
+    vertical-align: top;
+}
+
+.friends__cont__li--name {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.friends__cont__li--descr {
+
+}
+
+.friends__cont__accept_request_btn {
+    display: block;
+    margin-top: 0.1rem;
 }
 
 #community_header{
@@ -140,7 +212,8 @@
 
 #user_profile_div{
 	float: left;
-	margin-left: 20%;
+	margin-left: 15%;
+    max-width: 35%;
 }
 
 .profile_info{
@@ -148,25 +221,31 @@
 }
 
 #save_profile_button{
-	float: left;
 	margin-left: 40px
 }
 
 #cancel_edit_profile{
-	float: left;
 	margin-left: 10px;
 }
 
+#edit_profile_form {
+    background-color: #f4f4f4;
+    display: none;
+}
+
 #edit_profile_form_container{
-	width: 20%;
-	margin-left: 5%;
-	float: left;
-	background-color: #f4f4f4;
-	display: none;
+    padding-bottom: 16px;
+    margin-left: 3%;
+    float: left;
+    max-width: 35%;
+    /*display: none;*/
 }
 
 #edit_profile_form ul{
 	list-style-type: none;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #edit_profile_form ul li label{

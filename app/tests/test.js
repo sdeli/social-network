@@ -11,23 +11,7 @@ function redirectToOtherPage(res, otherPageUrl) {
     res.end();
 }d*/
 
-function majom(call) {
-    call();
-}
-
-async function geza() {
-    console.log('fasz');
-    var x = await wait();
-    console.log('a promise:' + x);
-    
-}
-
-function wait() {
-    return new Promise(resolve => {
-        setTimeout(function() {
-            resolve('1')
-        }, 3000)
-    });
-}
-
-majom(call);
+ function majom() {
+    console.log(cnasdasd)
+ }
+console.log(x);

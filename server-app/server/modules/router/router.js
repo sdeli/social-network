@@ -20,22 +20,7 @@ function routeHandler(request, response) {
     parsedUrl = url.parse(req.url, true)
     parsedUrl.path = trimmPath(parsedUrl.path);
 
-    if (path.extname(parsedUrl.path)) {
-        serveStaticFiles();
-    } else {
-        servePages.call(this, req, res, parsedUrl);
-    }
-}
-
-function serveStaticFiles() {
-    let filePath = `${publicFolder}${parsedUrl.path}`;
-    let ifFileExist = fs.existsSync(filePath);
-
-    if (ifFileExist) {
-        respondWithStaticFile(res, filePath);
-    } else {
-        send404byPlainText();
-    }
+    servePages.call(this, req, res, parsedUrl);
 }
 
 function servePages() {
@@ -56,10 +41,29 @@ function servePages() {
             
             break;
         } else if (pathVariables === false && i === routesArrLength - 1) {
-            send404byPlainText();
+            checkIfStaticFile()
         }
     }
 };
+
+function checkIfStaticFile() {
+    if (path.extname(parsedUrl.path)) {
+        serveStaticFiles();
+    } else {
+        send404byPlainText();
+    }
+}
+
+function serveStaticFiles() {
+    let filePath = `${publicFolder}${parsedUrl.path}`;
+    let ifFileExist = fs.existsSync(filePath);
+
+    if (ifFileExist) {
+        respondWithStaticFile(res, filePath);
+    } else {
+        send404byPlainText();
+    }
+}
 
 function send404byPlainText() {
     res.writeHead(404, {"Content-Type": "text/plain"});

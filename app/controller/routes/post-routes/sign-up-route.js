@@ -1,64 +1,69 @@
-const {logInUser, collectRequestBody, sendStatusMessageToFrontEnd, generateMemberId} = require('../../utils/utils.js');
+const {logInUser, collectRequestBody, sendStatusMessageToFrontEnd, generateRandomStr} = require('../../utils/utils.js');
 const {checkIfUserExists, insertOneUserToDb} = require('../../../model/user-db-fns.js')
 
 function signUpRoute(server, db) {
-    let response;
-
     server.route('/sign-up', {method : 'POST'}, (req, res) => {
-        signUpRouteCallBack(req, res);
+        let userDataObj;
+
+        collectRequestBody(req)
+        .then(resolvedUserDataObj => {
+            userDataObj = resolvedUserDataObj;
+
+            return checkIfUserExists(db, userDataObj);
+        })
+        .then(ifUserExist => {
+            return processUserInsertionToDb(db, ifUserExist, userDataObj, res);
+        })
+        .then((userCredentials) => {
+            console.log('user inserted');
+            logInUser(userCredentials, res);
+        })
+        .catch(e => {
+            console.log(e);
+            let msg = `there has been an error: ${e}`;
+            sendStatusMessageToFrontEnd(200, 'OK', 'text/plain', msg, res);
+        });
+
     });
 
-    async function signUpRouteCallBack(req, res) {
-        response = res;
+    function processUserInsertionToDb(db, ifUserExist, userDataObj, res) {
+        if (ifUserExist) {
+            throw new Error('there has been a user with a same email address');
+        } else {
+            let isUserDataObjFine = prepareMandatoryFields(userDataObj);
 
-        let userDataJson = '';
-
-        req.on('data', (chunk) => {
-            userDataJson += chunk;
-        });
-
-        req.on('end', () => {
-            userDataObj = JSON.parse(userDataJson);
-
-            checkIfUserExists(db, userDataObj)
-                .then(ifEmailExist => {
-                    if (ifEmailExist) {
-                        let msg = 'there has been a user with a same email adress';
-                        sendStatusMessageToFrontEnd(200, 'OK', 'text/plain', msg, res);
-                    } else {
-                        prepareMandatoryFields(userDataObj);
-
-                        insertOneUserToDb(db, userDataObj)
-                            .then((userCredentials) => {
-                                console.log('user inserted');
-                                logInUser(userCredentials, res);
-                            }).catch(e => {
-                                console.log(e);
-                                let msg = `there has been an error: ${e}`;
-                                sendStatusMessageToFrontEnd(200, 'OK', 'text/plain', msg, res);
-                            });
-                    }
-                }).catch(e => {
-                    console.log(e);
-                    let msg = `there has been an error: ${e}`;
-                    sendStatusMessageToFrontEnd(200, 'OK', 'text/plain', msg, res);
-                });
-        });
+            if (isUserDataObjFine === true) {
+                return insertOneUserToDb(db, userDataObj)
+            } else {
+                throw new Error(isUserDataObjFine);
+            }
+        }
     }
 
     function prepareMandatoryFields(userDataObj) {
         if (!userDataObj.password) {
             return 'there is no password set'
-        } else if (!userDataObj.usrName) {
-            return 'there is no usrName set'
-        } else if (!userDataObj.email) {
-            return 'there is no email set'
-        } else if (!userDataObj.profilePic) {
-            userDataObj.profilePic = 'default_profile.png';
-        } 
+        }
 
-        userDataObj.memberId = generateMemberId(userDataObj.usrName);
+        if (!userDataObj.usrName) {
+            return 'there is no usrName set'
+        }
+
+        if (!userDataObj.email) {
+            return 'there is no email set'
+        }
+
+        userDataObj.docId = `doc-id-${generateRandomStr(7)}`;
+        userDataObj.profilePicName = 'default_profile.png';
+        userDataObj.localtion = 'nothing specified';
+        userDataObj.interests = 'nothing specified';
+        userDataObj.description = 'nothing specified';
+        userDataObj.friendRequests = [];
+        userDataObj.friends = [];
+        
+        return true;
     }
 }
 
 module.exports = signUpRoute;
+

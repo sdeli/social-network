@@ -3,65 +3,67 @@
  * Description: 
  * Author: Sandor Deli
  * logic: 
- *
- userDocFields:
- name : {type : string},
- email : {type : string},
- pass : {type : string},
- memberId : {type : string},
- profilePic : `${this.memberId}`-String` 
- friends : [{member_id : String, friend_name : String, profile_pic: String}],
- friendRequest : [{member_id : String, friend_name : String, profile_pic: String}],
- user_profile :  
-
- UserProfileDocFileds:
- localtion : {type : String},
- description : {type : String},
- interests : {type : String},
- profile_pic : {type : String, def_value : 'default.png'} 
+ * 
+userStatusSchema = {
+    "usrName" : "Sandor Deli", 
+    "password" : "asdd", 
+    "email" : "bgfkszmsdeli@gmail.com", 
+    "profilePicName" : "profile-img-hY7D1i.png", 
+    "memberId" : "Sandor deli-pzZu^y", 
+    "location" : "Miami", 
+    "description" : "I am a fan boy of coding", 
+    "interests" : "coding"
+    "friends" : [ObjectId]
+    "friendsRequests" : [ObjectId]
+}
  */
 
- /*
-    userStatusSchema = {
-        usrEmail : String,
-        usrStatus : String,
-        usrName : String,
-        statusDate : Date
-    }
- */
-
-function insertOneUserStatusToDb(db, userDataObj) {
+function insertStatusDetailsToDb(db, statusDetailsObj) {
     return new Promise((resolve, reject) => {
         db.collection('users_status')
-            .insertOne(userDataObj).then(userDataObj => {
-                resolve(userDataObj.ops[0])
-            }).catch(e => {
-                console.log(e);
-                reject(e);
-            });
+        .insertOne(statusDetailsObj)
+        .then(statusDetailsObj => {
+            resolve(statusDetailsObj.ops[0])
+        }).catch(e => {
+            console.log(e);
+            reject(e);
+        });
     });
 }
 
-function getDate() {
-    let today = new Date();
-    //let hh = today.getHours()
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0!
-    let yyyy = today.getFullYear();
+function getUserStatusesFromDb(db, query) {
+    return new Promise((resolve, reject) => {
+        db.collection('users_status')
+        .find(query)
+        .toArray()
+        .then(result => {
+            if (result) {
+                resolve(result);
+            } else {
+                resolve(false);
+            }
+        }).catch(e => {
+            console.log(e);
+            reject('there has been an error with the db')
+        });
+    });
+}
 
-    if(dd<10) {
-        dd = '0'+dd
-    } 
-
-    if(mm<10) {
-        mm = '0'+mm
-    } 
-
-    let today = mm + ' ' + dd + ' ' + yyyy;
-    return today
+function updateAllUserStatusesInDb(db, findQuery, updateQuery, updateOpts) {
+    updateOpts = updateOpts || {returnOriginal : false}
+    return new Promise((resolve, reject) => {
+        db.collection('users_status')
+        .updateMany(findQuery, updateQuery, updateOpts)
+        .then((updates) => {
+            resolve(updates);
+        }).catch(e => {
+            reject(e);
+        })
+    });
 }
 
 module.exports = {
-    insertOneUserToDb,
-    getDate
+    insertStatusDetailsToDb,
+    getUserStatusesFromDb,
+    updateAllUserStatusesInDb
 }

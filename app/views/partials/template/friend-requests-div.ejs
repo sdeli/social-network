@@ -1,0 +1,17 @@
+<div class="friend_requests">
+    <% if (usrProfileObj.friendRequests.length === 0) { %>
+    <h3>Nobody is requesting friendship to you at the moment</h3>
+    <% } else { %>
+        <h3 class="friend_requests__heading">Friend Requests:</h3>
+        <% for(var i = 0; i < usrProfileObj.friendRequests.length; i++) {%>
+        <div class="friend_requests__cont clearfix">
+            <img class="friend_requests__cont__img" src="/users_profile_pic/<%= usrProfileObj.friendRequests[i].profilePicName %>" alt="">
+            <ul class="friend_requests__cont__ul">
+                <li class="friends__cont__li friend_requests__cont__li--name"><a href='/diff-user-profile-page/<%= usrProfileObj.friendRequests[i].docId %>'><%= usrProfileObj.friendRequests[i].usrName %></a></li>
+                <li class="friend_requests__cont__li friend_requests__cont__li--descr"><%= usrProfileObj.friendRequests[i].description %></li>
+            </ul>
+            <button class="friend_requests__cont__accept_request_btn" data-docid='<%= usrProfileObj.friendRequests[i].docId %>'>Accept Request</button>
+        </div>
+        <% } %>
+    <% } %>
+</div>

@@ -4,7 +4,8 @@
 
 #user_profile_div{
 	float: left;
-	margin-left: 20%;
+	margin-left: 15%;
+    max-width: 35%;
 }
 
 .profile_info{
@@ -13,25 +14,31 @@
 
 
 #save_profile_button{
-	float: left;
 	margin-left: 40px
 }
 
 #cancel_edit_profile{
-	float: left;
 	margin-left: 10px;
 }
 
+#edit_profile_form {
+    background-color: #f4f4f4;
+    display: none;
+}
+
 #edit_profile_form_container{
-	width: 20%;
-	margin-left: 5%;
-	float: left;
-	background-color: #f4f4f4;
-	display: none;
+    padding-bottom: 16px;
+    margin-left: 3%;
+    float: left;
+    max-width: 35%;
+    /*display: none;*/
 }
 
 #edit_profile_form ul{
 	list-style-type: none;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #edit_profile_form ul li label{

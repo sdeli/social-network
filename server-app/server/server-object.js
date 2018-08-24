@@ -1,6 +1,5 @@
 const router = require('./modules/router/router.js');
 const listen = require('./modules/listen/listen.js');
-const use = require('./modules/use/use.js');
 
 function createServerObj() {
     let usedOptions = {};
@@ -35,9 +34,6 @@ function createServerObj() {
             for (key in newGlobals) {
                 ejsGlobals[key] = newGlobals[key];
             }
-        },
-        use : (optionsObj) => {
-            use(optionsObj, usedOptions);
         }
     }
 }

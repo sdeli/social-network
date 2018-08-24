@@ -37,7 +37,7 @@ function signIn() {
                 setCookie(cookieName, encriptedCredentials, 100, '/');
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
-                console.log(this.response);
+                alert(this.response);
                 signInBtn.disabled = false;
             }
         }
@@ -77,14 +77,6 @@ function signUp() {
         xhttp.setRequestHeader("Content-Type", "application/json");
 
         xhttp.onload = function() {
-            console.log(this);
-            if (this.readyState === 4 && this.statusText === 'OK') {
-                setCookie('user_auth_session', this.response, 100, '/')
-                document.location.replace('/');
-           }
-        };
-
-        xhttp.onload = function() {
             let cookieAuthDetailsObj = returnObjFromJson(this.response);
 
             if (this.readyState === 4 && this.statusText === 'OK' && cookieAuthDetailsObj) {
@@ -94,7 +86,7 @@ function signUp() {
                 setCookie(cookieName, encriptedCredentials, 100, '/');
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
-                console.log(this.response);
+                alert(this.response);
                 signUpBtn.disabled = false;
             }
         }
@@ -140,10 +132,22 @@ function clearFormFields(formFieldsArr) {
     });
 }
 
+function checkIfHasSignedInCookie() {
+    var ifHasSignedInCookie = document.cookie.indexOf("user_auth_session") >= 0;
+
+    if (ifHasSignedInCookie) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     setCookie,
     returnObjFromJson,
     clearFormFields,
-    destroyCookie
+    destroyCookie,
+    clearFormFields,
+    checkIfHasSignedInCookie
 }
 },{}]},{},[3]);

@@ -27,14 +27,6 @@ function signUp() {
         xhttp.setRequestHeader("Content-Type", "application/json");
 
         xhttp.onload = function() {
-            console.log(this);
-            if (this.readyState === 4 && this.statusText === 'OK') {
-                setCookie('user_auth_session', this.response, 100, '/')
-                document.location.replace('/');
-           }
-        };
-
-        xhttp.onload = function() {
             let cookieAuthDetailsObj = returnObjFromJson(this.response);
 
             if (this.readyState === 4 && this.statusText === 'OK' && cookieAuthDetailsObj) {
@@ -44,7 +36,7 @@ function signUp() {
                 setCookie(cookieName, encriptedCredentials, 100, '/');
                 window.location.replace(`http://${window.location.hostname}:3000/dashboard`);
             } else {
-                console.log(this.response);
+                alert(this.response);
                 signUpBtn.disabled = false;
             }
         }

@@ -32,7 +32,7 @@ function signOut() {
             destroyCookie(cookieName, cookiesValue, '/');
             window.location.replace(`http://${window.location.hostname}:3000/`);
         } else {
-            console.log(this);
+            alert(this.response);
             signOutBtn.disabled = false;
         }
     }
