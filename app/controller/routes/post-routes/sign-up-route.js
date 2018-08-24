@@ -28,7 +28,7 @@ function signUpRoute(server, db) {
 
     function processUserInsertionToDb(db, ifUserExist, userDataObj, res) {
         if (ifUserExist) {
-            throw new Error('there has been a user with a same email address');
+            throw new Error('one or both of these credentials are already in use');
         } else {
             let isUserDataObjFine = prepareMandatoryFields(userDataObj);
 
