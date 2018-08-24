@@ -3,11 +3,12 @@
 <% include partials/template/head.ejs %>
 <body>
     <input id='log_out_user' type="button" value='sign out'>
+    <a href='/user-profile-page' class="button">see your profile</a>
     <h1>Dashboard</h1>
     <h2>Welcome <%= userName %></h2>
     <h2 id="community_header">Node Connect Statuses</h2>
     <div id="community_statuses_div">
-        <textarea id="statuses_textarea" rows='4' cols='58'></textarea><br>
+        <textarea id="statuses_textarea" placeholder="you can enter here a post and that will appear below in the feed... additionally you can click on other users in the feed and check their profile, maybe you would like to request friendship. The friendship request will be highlighted in your profile if you click on the 'see your profile' button" rows='4' cols='58'></textarea><br>
         <button id="submit_status_button" type='submit'>POST</button>
         
         <ol class="user_statuses">
