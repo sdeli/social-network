@@ -22,7 +22,8 @@ function userProfilePageRoute(server ,db) {
         geFriendAndFrReqsFromUsersDb(usersEmail)        
         .then(usrProfileObj => {
             res.writeHead(200, 'OK', {contentType : 'text/html'});
-
+            console.log(usrProfileObj);
+            console.log('--------------');
             var pageVars = {
                 siteTitle : 'social network',
                 pageTitle : `${usrProfileObj.usrName}s Dashboard`,
@@ -31,7 +32,7 @@ function userProfilePageRoute(server ,db) {
                 cssFileName : 'landing-bundled.css',
                 usrProfileObj : usrProfileObj[0]
             };
-
+            console.log(pageVars);
             res.renderFile('../views/user-profile.ejs', pageVars);
         })
     }
@@ -54,7 +55,7 @@ function userProfilePageRoute(server ,db) {
                     foreignField: "docId",
                     as: "friends"
                 }
-            },
+            }
             
         ]
 
