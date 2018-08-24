@@ -9,6 +9,7 @@
     padding: 7px;
     background: lightgrey;
     margin-bottom: 7px;
+    max-width: 363px;
 }
 
 .friend_requests__cont__img {
