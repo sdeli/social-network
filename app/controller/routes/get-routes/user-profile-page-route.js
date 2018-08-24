@@ -32,7 +32,9 @@ function userProfilePageRoute(server ,db) {
                 cssFileName : 'landing-bundled.css',
                 usrProfileObj : usrProfileObj[0]
             };
-            console.log(pageVars);
+            console.log(pageVars.usrProfileObj.friendRequests);
+            console.log('----------------');
+            console.log(pageVars.usrProfileObj.friends);
             res.renderFile('../views/user-profile.ejs', pageVars);
         })
     }
